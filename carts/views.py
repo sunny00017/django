@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from store.models import Product
+from store.models import Product ,Variation
 from .models import Cart, Cartitem
 from django.shortcuts import redirect
 from django.http import HttpResponse
@@ -11,18 +11,37 @@ def _cart_id(request):
     if not cart:
         cart = request.session.create()
     return cart
+
 def add_cart(request, product_id):
     product = Product.objects.get(id=product_id)
+    product_variation = []
+    if request.method == 'POST':
+        for item in request.POST:
+            key = item 
+            value = request.POST[key]
+          
+            
+            try:
+                variation = Variation.objects.get(product=product ,variation_category_iexect=key, variation_value_iexect=value)
+                product_variation.append(variation)
+               
+            except:
+                pass
+  
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
     except Cart.DoesNotExist:
         cart = Cart.objects.create(
             cart_id=_cart_id(request)
         )
+    cart.save()
     
     try:
-        cart_item = Cartitem.objects.get(product=product, cart=cart)
-        cart_item.quantity += 1
+        cart_item = Cartitem.objects.create(product=product, quantity = 1 , cart=cart)
+        if len(product_variation) > 0:
+            for item in product_variation:
+                cart_item.variations.add(item)
+        # cart_item.quantity += 1
         cart_item.save()
     except Cartitem.DoesNotExist:
         cart_item = Cartitem.objects.create(
@@ -30,8 +49,11 @@ def add_cart(request, product_id):
             quantity=1,
             cart=cart,
         )
+        if len(product_variation) > 0:
+           for item in product_variation:
+               cart_item.variations.add(item)
     
-    # Redirect the user to the cart page
+        cart_item.save()
     return redirect('cart')
 
 
@@ -57,6 +79,8 @@ def remove_cart_item(request, product_id):
 
 def cart(request, total=0, quantity=0 , cart_items=None):
     try:
+        tax = 0
+        grand_total = 0
         cart = Cart.objects.get(cart_id= _cart_id(request))
         cart_items = Cartitem.objects.filter(cart=cart, is_active=True)
         for cart_item in  cart_items:
