@@ -53,8 +53,9 @@ $(document).ready(function() {
 
 
 
-
+setTimeout(function (){
+    $('#massage').fadeOut('slow')
+},4000)
     
 }); 
 // jquery end
-
