@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'category',
     'accounts',
+<<<<<<< HEAD
     'store',
     'carts',
+=======
+>>>>>>> main
 ]
 
 MIDDLEWARE = [
@@ -66,8 +69,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+<<<<<<< HEAD
                 'category.context_processors.menu_links',
                 'carts.context_processors.counter',
+=======
+>>>>>>> main
             ],
         },
     },
@@ -136,6 +142,7 @@ MEDIA_ROOT = BASE_DIR /'media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< HEAD
 
 from django.contrib.messages import constants as messages
 
@@ -150,3 +157,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'shivampandey74826@gmail.com'
 EMAIL_HOST_PASSWORD = 'lfra pnnl sstf atue'
 EMAIL_USE_TLS = True
+=======
+>>>>>>> main

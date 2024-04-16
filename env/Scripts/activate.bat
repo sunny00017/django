@@ -8,7 +8,11 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
+<<<<<<< HEAD
 set VIRTUAL_ENV=C:\ashvika-collection\env
+=======
+set VIRTUAL_ENV=C:\Users\user\Desktop\mywebsite\env
+>>>>>>> main
 
 if not defined PROMPT set PROMPT=$P$G
 

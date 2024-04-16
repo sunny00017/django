@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -80,3 +81,8 @@ def activate(request, uidb64, token):
     context = {'uidb64': uidb64, 'token': token}
     return render(request, 'accounts/account_varification_email.html', context)
     # return HttpResponse('ok')
+=======
+from django.shortcuts import render
+
+# Create your views here.
+>>>>>>> main
