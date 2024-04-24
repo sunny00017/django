@@ -8,6 +8,7 @@ from django.db.models import Q
 from .forms import ReviewForm , ReviewsRating
 from django.contrib import messages
 from orders.models import OrderProduct
+from .models import ProductGallery
 # Create your views here.
 def store(request, category_slug=None):
     categories = None
@@ -43,14 +44,20 @@ def product_detail(request, category_slug, product_slug):
     except Exception as e:
         raise e
     
-    try:
-        orderproduct = OrderProduct.objects.filter(user=request.user , product_id=single_product.id).exists()
-    except OrderProduct.DoesNotExist:
+    if request.user.is_authenticated: 
+        try:
+            orderproduct = OrderProduct.objects.filter(user=request.user , product_id=single_product.id).exists()
+        except OrderProduct.DoesNotExist:
+            orderproduct = None
+    else:
         orderproduct = None
 
     
     # Get the reviews
     reviews = ReviewsRating.objects.filter(product_id=single_product.id, status=True)
+    
+    # Get the product gallery
+    product_gallery = ProductGallery.objects.filter(product_id=single_product.id )
     
     
     context = {
@@ -58,6 +65,7 @@ def product_detail(request, category_slug, product_slug):
         'in_cart' : in_cart,
         'orderproduct' : orderproduct,
         'reviews' : reviews,
+        'product_gallery' : product_gallery,
     }
     return render(request , 'store/product_detail.html' , context)
 
