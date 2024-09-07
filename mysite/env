@@ -1,0 +1,7 @@
+SECRET_KEY=django-insecure-8rcd7)uvhh!(4eo10*9s5+me9hmw%ci0b!*csx3*)2ish*ai5e
+DEBUG=True
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_HOST_USER=shivampandey74826@gmail.com
+EMAIL_HOST_PASSWORD="lfra pnnl sstf atue"
+EMAIL_USE_TLS=True
