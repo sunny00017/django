@@ -5,3 +5,5 @@ step-3 sudo apt-get install python3-venv -y
 database-related--> python3 manage.py dumpdata --exclude=contenttypes > datadump.json
                     python3 manage.py migrate
                     python3 manage.py loaddata datadump.json
+username --> ankush@gmail.com
+password --> asdf@123
