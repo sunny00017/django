@@ -7,3 +7,4 @@ database-related--> python3 manage.py dumpdata --exclude=contenttypes > datadump
                     python3 manage.py loaddata datadump.json
 username --> ankush@gmail.com
 password --> asdf@123
+# django-docker-compose
