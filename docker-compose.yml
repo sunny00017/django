@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  mysql_db:
+    image: mysql:latest
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: redhat
+      MYSQL_DATABASE: django_data
+      MYSQL_USER: django
+      MYSQL_PASSWORD: sheeto@123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+
+  phpmyadmin:
+    container_name: phpmyadmin_con
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql_db
+      MYSQL_ROOT_PASSWORD: redhat
+    depends_on:
+      - mysql_db
+        
+  django_app: 
+    image: app:latest
+    container_name: djano_app
+    ports:
+      - "8000:8000"
+    command: ["sh", "-c", "python manage.py migrate && python manage.py loaddata datadump.json &&  python manage.py runserver 0.0.0.0:8000 "] 
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql_db
+
+
+volumes:
+  mysql_data:
